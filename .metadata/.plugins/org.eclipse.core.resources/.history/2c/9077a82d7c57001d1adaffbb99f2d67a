@@ -1,0 +1,19 @@
+package com.gl.customer.dao;
+
+import java.util.List;
+
+import com.gl.customer.bean.Customer;
+import com.gl.customer.bean.CustomerDTO;
+
+
+
+public interface CustomerDao {
+
+	public void customerSave(Customer customer);
+	public Long generatecnr();
+	public List<Customer> findAll();
+	public Customer findById(Long id);
+	public void deleteCustomer(Long id);
+	
+	
+}

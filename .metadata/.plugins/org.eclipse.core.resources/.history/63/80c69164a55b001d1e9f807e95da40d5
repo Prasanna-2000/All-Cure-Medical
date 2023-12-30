@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <!-------------------------------------------------------------------------------------------->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap" rel="stylesheet">
+    <!-------------------------------------------------------------------------------------------->
+    <link rel="stylesheet" type="text/css" th:href="@{/CSS/productEntry_style.css}">
+</head>
+<body>
+    <div class="main-page">
+        <div class="logo-section">
+            <img  height ="10%" th:src="@{/image/icon.png}"><h2 id="label">All Cure Medical Shop</h2><br>
+        </div><br>
+        <div class="details-entry">
+            <h4 style="color: #888888; margin-left: 12%;">Enter the new product details</h4>
+        <form method="post" th:action="@{addProduct}" th:object="${productRecord}"> 
+            <div class="input-container">    
+                <input type="hidden" placeholder="ProductId" value="0" required/>
+            </div>
+            <div class="input-container">
+                <input type="text" placeholder="Name" th:field="*{productName}" required/>
+            </div>
+            <div class="input-container">
+                <input type="text" placeholder="WholesaleRate" th:field="*{wholesaleRate}" required />
+            </div>   
+            <div class="input-container">
+                <input type="text" placeholder="RetailRate" th:field="*{retailRate}" required />
+            </div>   
+            <div class="input-container">
+                <input type="text" placeholder="Stock" th:field="*{stock}" required /><br>
+            </div>
+        <button  type="submit"><b>Save details</b></button>
+        </form>
+        </div>
+    </div>
+</body>
+</html>

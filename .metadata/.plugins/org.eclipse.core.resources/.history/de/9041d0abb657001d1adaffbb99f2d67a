@@ -1,0 +1,33 @@
+package com.gl.bookReviewClient.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.gl.bookReviewClient.api.BookApi;
+import com.gl.bookReviewClient.bean.BookDTO;
+
+@RequestMapping("client")
+@RestController
+public class BookController {
+	@Autowired
+	private BookApi bookApi;
+	
+	@GetMapping("/book-entry")
+	public ModelAndView showBookEntryPage()
+	{
+		BookDTO bookDTO=new BookDTO();
+		ModelAndView mv= new ModelAndView("BookEntryPage");
+		mv.addObject("bookRecord",bookDTO);
+		return mv;
+	}
+	@PostMapping("/book")
+	public ModelAndView saveNewBook(@ModelAttribute("bookRecord") BookDTO book)  {
+		bookApi.save(book);
+		return new ModelAndView("redirect:book-entry");
+	}
+}

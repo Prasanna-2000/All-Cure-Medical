@@ -1,0 +1,72 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.main-page {
+    display: flex;
+    flex-direction: column;
+    background-color: #FFFEFF;
+    width: 800px;
+    height: auto;
+    margin: 40px auto;
+    box-shadow: 5px 8px 20px #888888;
+    font-family: 'Titillium Web', sans-serif;
+}
+
+.top-section {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    border-radius: 8px;
+    margin-left: 35px;
+    margin-right: 40px;
+}
+
+#logo-main {
+    margin-left: 250px;
+    margin-top: 15px;
+}
+
+.middle-section > ul{
+    list-style: none;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+table{
+    width: 93%;
+}
+
+.amount{
+    margin-left: 500px;
+    color: #888888;
+}
+
+.bottom-section{
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-top: 60px;
+    margin-bottom: 50px;
+    padding: 20px 20px;
+    border-radius: 8px;
+}
+
+.bottom-section > form >input{
+    padding: 12px 12px;
+    border: none;
+    outline: none;   
+}
+
+button {
+    margin-left: 550px;
+    width: 120px;
+    height: 40px;
+    background-color: #FFFEFF;
+    color: #386870;
+}
+
+button:hover{
+    background-color: #386870;
+    color: #FFFEFF;
+}

@@ -1,0 +1,7 @@
+1666956432630	Rename resource 'WholesaleOrder'
+1666974961363	Delete resource 'orderService'
+1666976300496	Delete resource 'Order'
+1666976386528	Delete resource 'orderService'
+1667040177565	Rename resource 'customer'
+1667042142183	Rename resource 'Product'
+1667042292642	Delete resource 'CustomerService'

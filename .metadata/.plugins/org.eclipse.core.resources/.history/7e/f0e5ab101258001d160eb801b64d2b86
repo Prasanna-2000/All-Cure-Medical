@@ -1,0 +1,54 @@
+package com.project.AllCureMedical.api;
+
+import java.util.List;
+
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import com.project.AllCureMedical.bean.BillDTO;
+import com.project.AllCureMedical.bean.SalesPersonDTO;
+
+
+
+@FeignClient(name="ORDER-SERVICE")
+public interface OrderApi {
+	@GetMapping("rbill/all-rbills")
+	public List<BillDTO> showAllRBills();
+	@GetMapping("rbill/rbill/{id}")
+	public BillDTO findRById(@PathVariable long id);
+	@PostMapping("rbill/add-rbill")
+	public String saveRBill(@RequestBody BillDTO billDTO);
+	@DeleteMapping("rbill/delete-rbill/{id}")
+	public String deleteRById(@PathVariable long id);
+	@PutMapping("rbill/edit-rbill")
+	public String editRBill(@RequestBody BillDTO billDTO);
+	
+	@GetMapping("wbill/all-wbills")
+	public List<BillDTO> showAllWBills();
+	@GetMapping("wbill/wbill/{id}")
+	public BillDTO findWById(@PathVariable long id);
+	@PostMapping("wbill/add-wbill")
+	public String saveWBill(@RequestBody BillDTO billDTO);
+	@DeleteMapping("wbill/delete-wbill/{id}")
+	public String deleteWById(@PathVariable long id);
+	@PutMapping("wbill/edit-wbill")
+	public String editWBill(@RequestBody BillDTO billDTO);
+	
+	@GetMapping("salesPerson/all-salesPersons")
+	public List<SalesPersonDTO> displayAllSalesPerson();
+	@GetMapping("salesPerson/findSalesPerson/{id}")
+	public SalesPersonDTO findSalesPersonById(@PathVariable String id);
+	@PostMapping("salesPerson/saveSalesPerson")
+	public String saveSalesPerson(@RequestBody SalesPersonDTO newspDto);
+	@DeleteMapping("salesPerson/deleteSalesPerson/{id}")
+	public String deleteSalesPerson(@PathVariable String id);
+	@PutMapping("salesPerson/editComission")
+	public String editComission(@RequestBody SalesPersonDTO newspDto);
+	
+}

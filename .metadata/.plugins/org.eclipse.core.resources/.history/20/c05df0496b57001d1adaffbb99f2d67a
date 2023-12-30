@@ -1,0 +1,11 @@
+package com.gl.Product.dao;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import com.gl.Product.bean.Products;
+
+public interface ProductRepository extends JpaRepository<Products, String> {
+	@Query("select max(productId) from Products")
+	public Long findMaxProductId();
+}

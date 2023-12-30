@@ -1,0 +1,75 @@
+//package com.gl.bookReviewClient.controller;
+//
+//import java.util.List;
+//
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.web.bind.annotation.GetMapping;
+//import org.springframework.web.bind.annotation.ModelAttribute;
+//import org.springframework.web.bind.annotation.PathVariable;
+//import org.springframework.web.bind.annotation.PostMapping;
+//import org.springframework.web.bind.annotation.RequestMapping;
+//import org.springframework.web.bind.annotation.RequestParam;
+//import org.springframework.web.bind.annotation.RestController;
+//import org.springframework.web.servlet.ModelAndView;
+//
+//import com.gl.bookReviewClient.api.BookApi;
+//import com.gl.bookReviewClient.api.ReviewApi;
+//import com.gl.bookReviewClient.bean.BookDTO;
+//import com.gl.bookReviewClient.bean.ReviewDTO;
+//
+//@RequestMapping("client")
+//@RestController
+//public class ClientController {
+//	@Autowired
+//	private BookApi bookApi;
+//	
+//	@Autowired
+//	private ReviewApi reviewApi;
+//	
+////	@GetMapping("review-book/{id}")
+////	public ModelAndView showABookReview(@PathVariable int id) {
+////		ModelAndView mv=new ModelAndView("showBookReviewPage");
+////		BookDTO bookDTO=bookApi.findById(id);
+////		List<ReviewDTO> reviewList=reviewApi.findReviewByBook(id);
+////		mv.addObject("book",bookDTO);
+////		mv.addObject("reviewList", reviewList);
+////		return mv;
+////	}
+//	
+//	@GetMapping("index")
+//	public ModelAndView showIndexPage() {
+//		return new ModelAndView("index");
+//	}
+//	
+//	@GetMapping("/review-book")
+//	public ModelAndView showbookIdEntryPage() {
+//		return new ModelAndView("BookIdEntryPage");
+//	}
+//	
+//	@PostMapping("/review-book")
+//	public ModelAndView showReviewpages(@RequestParam("bookId") int bookId,@RequestParam("pageChoice") String pageChoice)
+//	{
+//		ModelAndView mv=null;
+//		BookDTO bookDTO=bookApi.findById(bookId);
+//		if(pageChoice.equalsIgnoreCase("review-entry")) {
+//			ReviewDTO reviewDTO =new ReviewDTO();
+//			mv=new ModelAndView("ReviewEntryPage");
+//			mv.addObject("book",bookDTO);
+//			mv.addObject("reviewRecord",reviewDTO);
+//		}
+//		else if(pageChoice.equalsIgnoreCase("review-display"))
+//		{
+//			mv=new ModelAndView("showBookReviewPage");
+//			List<ReviewDTO> reviewList=reviewApi.findReviewByBook(bookId);
+//			mv.addObject("book",bookDTO);
+//			mv.addObject("reviewList", reviewList);
+//		}
+//		return mv;
+//	}
+//	
+//	@PostMapping("/review-entry")
+//	public ModelAndView savenewReview(@ModelAttribute("reviewrecord") ReviewDTO reviewDTO) {
+//		reviewApi.save(reviewDTO);
+//		return new ModelAndView("redirect:/client/index");
+//	}
+//}

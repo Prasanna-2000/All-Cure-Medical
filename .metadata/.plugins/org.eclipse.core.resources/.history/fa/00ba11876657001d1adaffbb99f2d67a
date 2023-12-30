@@ -1,0 +1,11 @@
+package com.gl.Product.Repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.gl.Product.bean.Products;
+
+
+
+public interface ProductRepository extends JpaRepository<Products, String> {
+	
+}

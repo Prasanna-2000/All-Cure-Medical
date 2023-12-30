@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet" th:href="@{/css/footer_style.css}">
+<link>
+</head>
+<body>
+	<footer th:replace="home_template :: footer"></footer>
+</body>
+</html>

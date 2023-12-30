@@ -1,0 +1,28 @@
+package com.project.AllCureMedical.api;
+
+import java.util.List;
+
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+
+
+@FeignClient(name="ORDER-SERVICE")
+public interface OrderApi {
+	@GetMapping("customers/all-rbills")
+	public List<BillDTO> showAllBills();
+	@GetMapping(value="/rbill/{id}", produces=MediaType.APPLICATION_JSON_VALUE)
+	public BillDTO findById(@PathVariable long id)
+	@PostMapping(value="/add-rbill",consumes=MediaType.APPLICATION_JSON_VALUE)
+	public String saveBill(@RequestBody BillDTO billDTO) 
+	@DeleteMapping(value="/delete-rbill/{id}", produces=MediaType.APPLICATION_JSON_VALUE)
+	public String deleteById(@PathVariable long id)
+	@PutMapping(value="/edit-rbill",consumes=MediaType.APPLICATION_JSON_VALUE)
+	public String editBill(@RequestBody BillDTO billDTO)
+}

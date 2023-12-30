@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.debug.core.groups.GroupLaunchConfigurationType">
+    <stringAttribute key="org.eclipse.debug.core.launchGroup.0.action" value="OUTPUT_REGEXP"/>
+    <stringAttribute key="org.eclipse.debug.core.launchGroup.0.actionParam" value="#1"/>
+    <booleanAttribute key="org.eclipse.debug.core.launchGroup.0.adoptIfRunning" value="true"/>
+    <booleanAttribute key="org.eclipse.debug.core.launchGroup.0.enabled" value="true"/>
+    <stringAttribute key="org.eclipse.debug.core.launchGroup.0.mode" value="run"/>
+    <stringAttribute key="org.eclipse.debug.core.launchGroup.0.name" value="eurekaServerApplication - EurekaServerApplication"/>
+    <stringAttribute key="org.eclipse.debug.core.launchGroup.1.action" value="OUTPUT_REGEXP"/>
+    <stringAttribute key="org.eclipse.debug.core.launchGroup.1.actionParam" value="#2"/>
+    <booleanAttribute key="org.eclipse.debug.core.launchGroup.1.adoptIfRunning" value="false"/>
+    <booleanAttribute key="org.eclipse.debug.core.launchGroup.1.enabled" value="true"/>
+    <stringAttribute key="org.eclipse.debug.core.launchGroup.1.mode" value="inherit"/>
+    <stringAttribute key="org.eclipse.debug.core.launchGroup.1.name" value="CustomerService - CustomerServiceApplication"/>
+    <stringAttribute key="org.eclipse.debug.core.launchGroup.2.action" value="OUTPUT_REGEXP"/>
+    <stringAttribute key="org.eclipse.debug.core.launchGroup.2.actionParam" value="#3"/>
+    <booleanAttribute key="org.eclipse.debug.core.launchGroup.2.adoptIfRunning" value="false"/>
+    <booleanAttribute key="org.eclipse.debug.core.launchGroup.2.enabled" value="true"/>
+    <stringAttribute key="org.eclipse.debug.core.launchGroup.2.mode" value="inherit"/>
+    <stringAttribute key="org.eclipse.debug.core.launchGroup.2.name" value="ProductService - ProductApplication"/>
+    <stringAttribute key="org.eclipse.debug.core.launchGroup.3.action" value="OUTPUT_REGEXP"/>
+    <stringAttribute key="org.eclipse.debug.core.launchGroup.3.actionParam" value="#4"/>
+    <booleanAttribute key="org.eclipse.debug.core.launchGroup.3.adoptIfRunning" value="false"/>
+    <booleanAttribute key="org.eclipse.debug.core.launchGroup.3.enabled" value="true"/>
+    <stringAttribute key="org.eclipse.debug.core.launchGroup.3.mode" value="inherit"/>
+    <stringAttribute key="org.eclipse.debug.core.launchGroup.3.name" value="orderService - OrderServiceApplication"/>
+    <stringAttribute key="org.eclipse.debug.core.launchGroup.4.action" value="OUTPUT_REGEXP"/>
+    <stringAttribute key="org.eclipse.debug.core.launchGroup.4.actionParam" value="#6"/>
+    <booleanAttribute key="org.eclipse.debug.core.launchGroup.4.adoptIfRunning" value="false"/>
+    <booleanAttribute key="org.eclipse.debug.core.launchGroup.4.enabled" value="true"/>
+    <stringAttribute key="org.eclipse.debug.core.launchGroup.4.mode" value="inherit"/>
+    <stringAttribute key="org.eclipse.debug.core.launchGroup.4.name" value="AllCureMedical - AllCureMedicalApplication"/>
+    <stringAttribute key="org.eclipse.debug.core.launchGroup.5.action" value="OUTPUT_REGEXP"/>
+    <stringAttribute key="org.eclipse.debug.core.launchGroup.5.actionParam" value="#5"/>
+    <booleanAttribute key="org.eclipse.debug.core.launchGroup.5.adoptIfRunning" value="false"/>
+    <booleanAttribute key="org.eclipse.debug.core.launchGroup.5.enabled" value="true"/>
+    <stringAttribute key="org.eclipse.debug.core.launchGroup.5.mode" value="inherit"/>
+    <stringAttribute key="org.eclipse.debug.core.launchGroup.5.name" value="UserService - MedicalShopUsersApplication"/>
+    <listAttribute key="org.eclipse.debug.ui.favoriteGroups">
+        <listEntry value="org.eclipse.debug.ui.launchGroup.run"/>
+    </listAttribute>
+</launchConfiguration>

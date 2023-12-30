@@ -1,0 +1,34 @@
+package com.project.AllCureMedical.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.project.AllCureMedical.api.CustomerApi;
+import com.project.AllCureMedical.bean.CustomerDTO;
+
+
+@RequestMapping("client")
+@RestController
+public class ClientController {
+	@Autowired
+	private CustomerApi customerApi;
+	
+	@GetMapping("/book-entry")
+	public ModelAndView showBookEntryPage()
+	{
+		CustomerDTO CustomerDTO=new CustomerDTO();
+		ModelAndView mv= new ModelAndView("BookEntryPage");
+		mv.addObject("bookRecord",bookDTO);
+		return mv;
+	}
+	@PostMapping("/book")
+	public ModelAndView saveNewBook(@ModelAttribute("bookRecord") BookDTO book)  {
+		bookApi.save(book);
+		return new ModelAndView("redirect:book-entry");
+	}
+}

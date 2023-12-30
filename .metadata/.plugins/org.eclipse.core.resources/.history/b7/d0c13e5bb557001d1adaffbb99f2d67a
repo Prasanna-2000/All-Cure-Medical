@@ -1,0 +1,13 @@
+package com.project.AllCureMedical;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class AllCureMedicalApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(AllCureMedicalApplication.class, args);
+	}
+
+}

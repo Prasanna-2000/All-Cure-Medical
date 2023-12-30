@@ -1,0 +1,18 @@
+package com.gl.Product.Repository;
+
+import java.util.List;
+
+import org.springframework.web.bind.annotation.RestController;
+
+import com.gl.Product.bean.Products;
+import com.gl.Product.bean.ProductsDTO;
+
+
+@RestController
+public interface productDao {
+	public void SaveProduct(Products product);
+	public List<ProductsDTO> findProduct();
+	public ProductsDTO findProductById(String Id);
+	public void DeleteProduct(String Id);
+	public void delete(String id);
+}

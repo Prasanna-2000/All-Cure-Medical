@@ -1,0 +1,32 @@
+1666872938729	Copy file
+1666873072676	Rename package 'com.project.WholesaleOrder.Entity'
+1666873213603	Rename type 'Course'
+1666873927417	Rename type 'CourseRepository'
+1666874022177	Rename type 'CourseDaoImpl'
+1666874038923	Rename type 'CourseDao'
+1666874267001	Delete element
+1666874944288	Rename type 'CourseController'
+1666879748731	Copy file
+1666879786066	Rename resource 'wholesaleOrderReportPage.jsp'
+1666879798677	Rename resource 'wholesaleOrderReportPage.jsp.jsp'
+1666882817077	Rename resource 'wholesaleOrderReportPage.jsp'
+1666882845454	Copy file
+1666883895511	Copy file
+1666884596747	Rename resource 'WholesaleOrderView.jsp'
+1666887969168	Delete elements
+1666887977738	Delete elements
+1666888125413	Rename resource 'courseEditPage.jsp'
+1666888326798	Copy file
+1666889431331	Copy file
+1666889610114	Delete element
+1666934041300	Copy compilation unit
+1666934044681	Delete element
+1666946417934	Copy compilation unit
+1666946811997	Copy compilation unit
+1666946838932	Rename type 'WholesaleOrderDao'
+1666954124557	Rename package 'com.project.WholesaleOrder'
+1666954137529	Rename package 'com.project.WholesaleOrder.controller'
+1666954152714	Rename package 'com.project.WholesaleOrder.dao'
+1666954164719	Rename package 'com.project.WholesaleOrder.bean'
+1666954177207	Rename package 'com.project.WholesaleOrder.service'
+1666954197561	Rename type 'WholesaleOrderApplication'

@@ -1,0 +1,24 @@
+package com.project.AllCureMedical.api;
+
+import java.util.List;
+
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import com.project.AllCureMedical.bean.CustomerDTO;
+
+
+@FeignClient(name="CUSTOMER-SERVICE")
+public interface CustomerApi {
+	@GetMapping("customers/customer")
+	public List<CustomerDTO> findAll();
+	@GetMapping("books/book/{id}")
+	public CustomerDTO findById(@PathVariable long id);
+	@PostMapping("/books/book")
+	public String saveBill(@RequestBody CustomerDTO customerDTO);
+	public String Delete(@PathVariable Long id);
+	public String editCust(@RequestBody CustomerDTO customerDTO);
+}

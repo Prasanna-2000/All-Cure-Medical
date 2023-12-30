@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/invoice_style.css}">
+    <link rel="stylesheet" th:href="@{/css/table_style.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap" rel="stylesheet">
+    <title>invoice and payment</title>
+</head>
+<body>
+    <div class="main-page">
+        <ul class="top-section">
+            <li><h1 th:text="${orderNo}">order num</h1><br>
+            <h4 style="color:#888888;">Issued on :</h4><h3 th:text="${date}">date</h3>
+            </li>
+            <li id="logo-main"><img th:src="@{/image/icon.png}"><h2>All Cure Medical Shop</h2></li>
+        </ul>
+        <div class="middle-section">
+            <ul>
+                <li th:if="${user}=='salesperson'"><h4 style="color:#888888;">Invoice for</h4>
+                <h3 th:text="${name}">Name</h3>
+                </li>
+                <li>
+                    <table class="responstable">
+                        <tr>
+                            <th>Product ID</th>
+                            <th>Rate</th>
+                            <th>Quantity</th>
+                            <th>Amount</th>
+                        </tr>
+                        <tr th:each="item : ${cartItemList}">
+                            <td th:text="${item.productId}">Product ID</td>
+                            <td th:text="${item.rate}">Rate</td>
+                            <td th:text="${item.quantity}">Quantity</td>
+                            <td th:text="${item.amount}">Amount</td>
+                        </tr>
+                    </table>
+                    <h4 th:if="${user} != 'salesperson'" class="amount" th:inline="text">Discount: [[${discount}]]</h4>
+                    <h4 class="amount" th:inline="text">Total Amount: [[${total}]]</h4>
+                </li>
+            </ul>
+        </div>
+        <div class="bottom-section">
+            <h3>Pay this invoice</h3>
+            <h5 style="color:#888888">Make payment for this invoice by filling in the details</h5>
+            
+            <form action="paid" method="post">
+            <input type="text" name="card number" placeholder="Card Number" required>
+            <input type="text" name="expiry" placeholder="MM/YY" required>
+            <input type="text" name="cvv" placeholder="CVV" required>
+            <br><br>
+            <button type="submit" th:inline="text" style="cursor: pointer;">Pay [[${total}]]</button>
+            </form>
+        </div>
+    </div>
+  
+</body>
+</html>

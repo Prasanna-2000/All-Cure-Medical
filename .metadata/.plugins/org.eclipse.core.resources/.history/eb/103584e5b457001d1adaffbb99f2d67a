@@ -1,0 +1,19 @@
+package snippet;
+
+public class Snippet {
+	server:
+	  port: 6161
+	
+	eureka:
+	  client:
+	    serviceUrl:
+	      defaultZone: http://localhost:6767/eureka/
+	spring:
+	    application:
+	     name: CLIENT-SERVICE
+	    mvc:
+	     view:
+	      prefix: /WEB-INF/jsp/
+	      suffix: .jsp
+}
+

@@ -1,0 +1,274 @@
+package com.project.AllCureMedical.controller;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.project.AllCureMedical.api.OrderApi;
+import com.project.AllCureMedical.api.ProductApi;
+import com.project.AllCureMedical.bean.BillDTO;
+import com.project.AllCureMedical.bean.ProductsDTO;
+import com.project.AllCureMedical.bean.SalesPersonDTO;
+import com.project.AllCureMedical.bean.WholesaleOrderDTO;
+
+@RequestMapping("ui")
+@RestController
+public class ClientControllerUi {
+	@Autowired
+	private ProductApi productApi;
+	
+	@Autowired
+	private OrderApi orderApi;
+	
+	String user = "salesperson";
+//	String user = "ordinary";
+//	String user = "super";
+	long cnr = 124568921;
+	
+	@GetMapping("home")
+	public ModelAndView showHomePage() {
+		ModelAndView mv = new ModelAndView("home_template");
+		List<ProductsDTO> productList = productApi.showAllProduct();
+		
+		//logic to make order button disappear if order is pending
+//		long cnr = 124568922;
+		List<WholesaleOrderDTO> orderList = findOrderById(cnr); //accept by user
+		Boolean allow = true;
+		
+		//RESEARCH NEEDED if list is sorted by time
+//		WholesaleOrderDTO w = orderList.get(0);
+//		if(w.getStatus().equalsIgnoreCase("pending"))
+//			allow = false;
+		
+		for(WholesaleOrderDTO w: orderList) {
+			if(w.getStatus().equalsIgnoreCase("pending"))
+				allow = false;
+		}
+		
+		mv.addObject("productList", productList);
+		mv.addObject("user", user);
+		mv.addObject("allow",allow);
+        return mv;
+    }
+	
+	@GetMapping("cart")
+	public ModelAndView showCartPage() {
+		ModelAndView mv = new ModelAndView("cart_template");
+		
+		//filter wOrder list by cnr
+//		long cnr = 124568922;
+		List<WholesaleOrderDTO> orderList = findOrderById(cnr); //accept by user
+//		List<WholesaleOrderDTO> orderList = orderApi.showAllWBills(); //accept by user
+		
+		mv.addObject("orderList", orderList);
+		mv.addObject("user", user);
+        return mv;
+	}
+	
+	@PostMapping("viewProduct") //add items to cart
+	public ModelAndView viewPro(@RequestParam("radio") List<String> idList, @RequestParam("stock_deduce") List<Integer> stockList) {
+		if(user == "ordinary") {
+			for(int i=0; i<stockList.size(); i++) {
+				if(stockList.get(i) == 0)
+					stockList.remove(i);
+			}
+			
+			List<ProductsDTO> orderList = new ArrayList<>();
+			Iterator<String> idIterator = idList.iterator();
+			Iterator<Integer> stockIterator = stockList.iterator();
+			
+			System.out.println(stockList + " " + idList);
+			
+			while(idIterator.hasNext() && stockIterator.hasNext()) {
+				String idNext = idIterator.next();
+				Integer stockNext = stockIterator.next();
+				
+				ProductsDTO pdto = productApi.showAProduct(idNext);
+				
+				WholesaleOrderDTO wdto = new WholesaleOrderDTO();
+				wdto.setCnr(cnr); //accept from user
+				wdto.setProductId(pdto.getProductId());
+				wdto.setRate(pdto.getWholesaleRate());
+				
+				System.out.println(stockNext);
+				wdto.setQuantity(stockNext);
+				orderApi.saveWBill(wdto);
+				
+				pdto.setStock(pdto.getStock() - stockNext);
+				productApi.editAProduct(pdto);
+				orderList.add(pdto);
+			}
+			return new ModelAndView("redirect:/ui/cart");
+		}
+		
+		else if(user == "salesperson") {
+			ModelAndView mv = new ModelAndView("payment_template");
+			for(int i=0; i<stockList.size(); i++) {
+				if(stockList.get(i) == 0)
+					stockList.remove(i);
+			}
+			
+			List<BillDTO> orderList = new ArrayList<>();
+			Iterator<String> idIterator = idList.iterator();
+			Iterator<Integer> stockIterator = stockList.iterator();
+			
+			System.out.println(stockList + " " + idList);
+			
+			while(idIterator.hasNext() && stockIterator.hasNext()) {
+				String idNext = idIterator.next();
+				Integer stockNext = stockIterator.next();
+				
+				ProductsDTO pdto = productApi.showAProduct(idNext);
+				
+				BillDTO bdto = new BillDTO();
+				bdto.setProductId(pdto.getProductId());
+				bdto.setRate(pdto.getRetailRate());
+				bdto.setAmount(pdto.getRetailRate()*stockNext);
+				
+				System.out.println(stockNext);
+				bdto.setQuantity(stockNext);
+				orderApi.saveRBill(bdto);
+				
+				pdto.setStock(pdto.getStock() - stockNext);
+				productApi.editAProduct(pdto);
+				orderList.add(bdto);
+			}
+			Integer total = 0;
+			for(BillDTO bdto: orderList) {
+				total += bdto.getAmount();
+			}
+			mv.addObject("cartItemList", orderList);
+			return mv;
+		}
+		else {
+			return new ModelAndView("redirect:/ui/home");
+		}
+	}
+	
+	@PostMapping("invoice")
+	public ModelAndView showInvoicePage() {
+		List<WholesaleOrderDTO> cartItemList = orderApi.findPendingWByCnr(cnr); //accept from user
+		ModelAndView mv = new ModelAndView("payment_template");
+		
+		Integer total = 0;
+		for(WholesaleOrderDTO wdto: cartItemList) {
+			total += wdto.getAmount();
+		}
+		
+		WholesaleOrderDTO tempwdto = cartItemList.get(0);
+		Long orderNo = tempwdto.getOrderNo();
+		String date = tempwdto.getBookingDate();
+		
+		Integer discount = (total/100)*5;
+		
+		mv.addObject("cartItemList", cartItemList);
+		mv.addObject("orderNo", orderNo);
+		mv.addObject("date", date);
+		mv.addObject("total", total-discount);
+		mv.addObject("discount", discount);
+		return mv;
+	}
+	
+	//set status of wOrder when paid the bill
+	@PostMapping("paid")
+	public ModelAndView setStatus() {
+//		long cnr = 124568922;
+		List<WholesaleOrderDTO> orderList = findOrderById(cnr); //accept by user
+		for(WholesaleOrderDTO w: orderList) {
+			w.setStatus("clear");
+			orderApi.editWBill(w);
+		}
+		return new ModelAndView("redirect:/ui/cart");
+	}
+	
+//	----------------------Admin panel-------------------------
+	
+	@GetMapping("product")
+	public ModelAndView showProductPage() {
+		ModelAndView mv = new ModelAndView("products_template");
+		List<ProductsDTO> productList = productApi.showAllProduct();
+		mv.addObject("productList", productList);
+        return mv;
+    }
+	
+	@GetMapping("deleteProduct/{id}")
+	public ModelAndView deleteProduct(@PathVariable String id) {
+		productApi.deleteProduct(id);
+		return new ModelAndView("redirect:/ui/product");
+	}
+	
+	@GetMapping("editProduct/{id}")
+	public ModelAndView showEditPage(@PathVariable String id) {
+		ProductsDTO pDTO = productApi.showAProduct(id);
+		ModelAndView mv = new ModelAndView("product_update_page");
+		mv.addObject("product",pDTO);
+		return mv;
+	}
+	
+	@PostMapping("editProduct/edit")
+	public ModelAndView editProduct(ProductsDTO productDTO) {
+		System.out.println(productDTO);
+		productApi.editAProduct(productDTO);
+		return new ModelAndView("redirect:/ui/product");
+	}
+	
+	@GetMapping("/addProduct")
+	public ModelAndView showProductEntry() {
+		ProductsDTO productDTO = new ProductsDTO();
+		ModelAndView mv = new ModelAndView("product_entry_page");
+		mv.addObject("productRecord",productDTO);
+		return mv;
+	}
+	
+	@PostMapping("/addProduct")
+	public ModelAndView saveNewProduct(@ModelAttribute(value="productRecord") ProductsDTO productDTO) {
+		productApi.saveAProducts(productDTO);
+		return new ModelAndView("redirect:/ui/product");
+	}
+	
+	@GetMapping("/orders")
+	public ModelAndView showOrdersPage() {
+		ModelAndView mv = new ModelAndView("orders_template");
+		List<WholesaleOrderDTO> orderList = orderApi.showAllWBills();
+		List<BillDTO> billList = orderApi.showAllRBills();
+		mv.addObject("orderList", orderList);
+		mv.addObject("billList",billList);
+        return mv;
+	}
+	
+//	--------------------------Admin panel end-------------------------
+	
+	@GetMapping("spCart")
+	public ModelAndView showSpCartPage() {
+		ModelAndView mv = new ModelAndView("sp_cart_template");
+		List<BillDTO> rOrderList = orderApi.showAllRBills();
+		mv.addObject("rOrderList", rOrderList);
+		mv.addObject("user", user);
+        return mv;
+	}
+	
+//	----------------------------------------------------
+	
+	//filter wOrder by cnr
+	public List<WholesaleOrderDTO> findOrderById(long cnr){
+		List<WholesaleOrderDTO> resList = new ArrayList<>();
+		List<WholesaleOrderDTO> wdtoList = orderApi.showAllWBills();
+		for(WholesaleOrderDTO w: wdtoList) {
+			if(w.getCnr() == cnr)
+				resList.add(w);
+		}
+		return resList;
+	}
+}

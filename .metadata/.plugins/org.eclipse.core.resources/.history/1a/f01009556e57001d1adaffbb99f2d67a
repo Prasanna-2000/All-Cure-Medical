@@ -1,0 +1,52 @@
+package com.gl.Product.service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.gl.Product.bean.Products;
+import com.gl.Product.bean.ProductsDTO;
+import com.gl.Product.dao.ProductsDao;
+import com.gl.orderService.bean.SalesPerson;
+import com.gl.orderService.bean.SalesPersonDTO;
+import com.gl.orderService.dao.SalesPersonDao;
+
+@Service
+public class ProductServiceImpl implements ProductsService {
+	@Autowired
+	private ProductsDao productsDao;
+
+	@Override
+	public void SaveProduct(ProductsDTO productDTO) {
+		Products products = new Products(productDTO);
+		productsDao.SaveProduct(products);		
+	}
+
+	@Override
+	public List<ProductsDTO> findAllProduct() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ProductsDTO findProductById(String Id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void DeleteAProduct(String Id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String generateId() {
+		String val = productsDao.generateId();
+		return val;
+	}
+
+	
+}

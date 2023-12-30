@@ -1,0 +1,59 @@
+package com.gl.Product.dao;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.gl.Product.bean.Products;
+import com.gl.Product.bean.ProductsDTO;
+
+
+
+@Repository
+public class productDaoImpl implements productDao {
+@Autowired
+public ProductRepository repo;
+	@Override
+	public void SaveProduct(Products p) {
+		repo.save(p);// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public List<ProductsDTO> findProduct() {
+		
+		List<Products> prList=repo.findAll();
+		List<ProductsDTO> DTOlist=new ArrayList<>();
+		for(Products pr:prList)
+		{
+			ProductsDTO courseDTO=new ProductsDTO(pr);
+			DTOlist.add(courseDTO);
+		}
+		return DTOlist;
+	}
+
+	@Override
+	public void delete(String id) {
+		// TODO Auto-generated method stub
+		repo.deleteById(id);
+
+	}
+
+	@Override
+	public ProductsDTO findProductById(String Id) {
+		Products h=repo.getById(Id);
+		ProductsDTO ref=new ProductsDTO(h);
+		return ref;
+	}
+
+	@Override
+	public void DeleteProduct(String Id) {
+		repo.deleteById(Id);
+		
+	}
+
+	
+
+}

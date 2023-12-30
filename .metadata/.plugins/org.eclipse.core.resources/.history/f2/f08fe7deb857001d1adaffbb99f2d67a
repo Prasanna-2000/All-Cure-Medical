@@ -1,0 +1,25 @@
+package com.gl.bookReviewClient.api;
+
+
+import java.util.List;
+
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import com.gl.bookReviewClient.bean.ReviewDTO;
+
+
+@FeignClient(name="REVIEW-SERVICE")
+public interface ReviewApi {
+	@GetMapping("reviews/review")
+	public List<ReviewDTO> findAll();
+	@GetMapping("reviews/review/{id}")
+	public ReviewDTO findById(@PathVariable long id);
+	@PostMapping("reviews/review")
+	public String save(@RequestBody ReviewDTO reviewDTO);
+	@GetMapping("reviews/review-book/{id}")
+	public List<ReviewDTO> findReviewByBook(@PathVariable int id);
+}

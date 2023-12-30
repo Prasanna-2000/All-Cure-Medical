@@ -1,0 +1,113 @@
+package com.gl.Product.dao;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.gl.Product.bean.Products;
+
+
+
+@Repository
+public class ProductsDaoImpl implements ProductsDao {
+@Autowired
+public ProductsRepository repository;
+	@Override
+	public void SaveProduct(Products products) {
+		repository.save(products);
+
+	}
+	@Override
+	public List<Products> findAllProduct() {
+		List<Products> personsList = repository.findAll();
+		return personsList;
+	}
+	@Override
+	public Products findProductById(String id) {
+		return repository.findById(id).orElse(null);
+
+	}
+	@Override
+	public void DeleteAProduct(String id) {
+		repository.deleteById(id);
+		
+	}
+	@Override
+	public String generateId() {
+		Integer val =repository.findMaxProductId();
+		if(val == null)
+			val = 1001;
+		else
+			val = val + 1;
+		return "P"+val;
+	}
+
+	
+	
+//	@Override
+//	public List<ProductsD> findProduct() {
+//		
+//		List<Products> prList=repo.findAll();
+//		List<ProductsDTO> DTOlist=new ArrayList<>();
+//		for(Products pr:prList)
+//		{
+//			ProductsDTO courseDTO=new ProductsDTO(pr);
+//			DTOlist.add(courseDTO);
+//		}
+//		return DTOlist;
+//	}
+//
+//	@Override
+//	public void delete(String id) {
+//		// TODO Auto-generated method stub
+//		repo.deleteById(id);
+//
+//	}
+//
+//	@Override
+//	public ProductsDTO findProductById(String Id) {
+//		Products h=repo.getById(Id);
+//		ProductsDTO ref=new ProductsDTO(h);
+//		return ref;
+//	}
+//
+//	@Override
+//	public void DeleteProduct(String Id) {
+//		repo.deleteById(Id);
+//		
+//	}
+//
+//	@Override
+//	public List<Products> findAllProduct() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public Products findProductById(String Id) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public void DeleteAProduct(String Id) {
+//		// TODO Auto-generated method stub
+//		
+//	}
+//
+//	@Override
+//	public Long generateId() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public Products findProductById(String Id) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+
+	
+
+}

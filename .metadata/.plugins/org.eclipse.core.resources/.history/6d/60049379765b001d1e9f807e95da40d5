@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" th:href="@{/css/home_style.css}">
+    <link rel="stylesheet" th:href="@{/css/table_style.css}">
+    <link rel="stylesheet" th:href="@{/css/footer_style.css}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <main>
+        <div class="box1">
+            <div class="icon_box">
+                <img id="icon" th:src="@{/image/icon.png}" alt="icon" height="50%">
+                <h3>All Cure Medical Shop</h3>
+            </div>
+            <div class="navigation_box">
+                <div class="nav_links">
+                    <h3> <a href="home">Home</a> </h3>
+                    <h3> <a href="cart">Cart</a> </h3>
+                    <h3> <a href="product">Products</a> </h3>
+                    <h3 id="nav_home" > <a href="/users">Users</a> </h3>
+                    <h3> <a href="/orders">Orders</a> </h3>
+                </div>
+                <hr>
+                <div class="logout_div">
+                    <h3> <a href="#">Logout</a> </h3>
+                </div>
+            </div>
+        </div>
+        <div class="box2">
+            <div class="profile_box">
+                <h3>Hello, user</h3>
+            </div>
+            <hr>
+            <div class="label_box">
+                <h1>Users</h1>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. At dolorem facere suscipit sed eveniet perferendis eum sapiente aliquam molestias optio officiis aut porro quam, labore repellat assumenda fugit nihil? Impedit?</p>
+            </div>
+            
+            <a th:href="@{/addCustomer}">Add Customer</a>
+            <a th:href="@{/addCustomer}">Add Customer</a>
+            <a th:href="@{/addCustomer}">Add Customer</a>
+            
+            <br>
+                  <h3 id="labels">Current Users</h3>
+                  <br>
+                  <table class="responstable">
+                    <tr>
+                      <th>Username</th>
+                      <th>Email</th>
+                      <th>User Type</th>
+                    </tr>
+                    
+                    <tr th:each="user : ${userList}">
+                      <td th:text="${user.username}">124568921</td>
+                      <td th:text="${user.email}">P1001</td>
+                      <td th:text="${user.userType}">25</td>
+                    </tr>
+                  </table>
+                  <br> <br>
+                  <hr>
+                  <br> <br>
+                  
+                  <h3 id="labels">Wholesale Customers(ordinary user)</h3>
+                  <br>
+                  <table class="responstable">
+                    <tr>
+                      <th>CNR</th>
+                      <th>Name</th>
+                      <th>Address</th>
+                      <th>Contact No</th>
+                      <th>Email</th>
+                      <th>Status</th>
+                    </tr>
+                    
+                    <tr th:each="customer : ${customerList}">
+                      <td th:text="${customer.cnr}">124568921</td>
+                      <td th:text="${customer.customerName}">124568921</td>
+                      <td th:text="${customer.customerAddress}">P1001</td>
+                      <td th:text="${customer.contactNumber}">25</td>
+                      <td th:text="${customer.email}">25</td>
+                      <td th:text="${customer.status}">P1001</td>
+                    </tr>
+                  </table>
+                  <br> <br>
+        </div>
+    </main>
+    
+    <footer th:replace="home_template :: footer"></footer>
+</body>
+</html>

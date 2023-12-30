@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/login_style.css}">
+</head>
+<body>
+    <div class="main-page">
+        <div class="logo-section" align="center">
+            <img  height ="10%" th:src="@{/image/icon.png}"><h2 style="margin-left: 4%;">All Cure Medical Shop</h2><br>
+            <h4 style="color: #888888;">Register to sign in(Ordinary User)</h4>
+        </div><br>
+        <div class="login">
+        <form method="post" action="registerOrdinary">
+            <div class="input-container">    
+                <i class="glyphicon glyphicon-user icon"></i> 
+                <input type="text" placeholder="Name" required name="name"/><br>
+            </div>
+            <div class="input-container">    
+                <i class="glyphicon glyphicon-envelope icon"></i> 
+                <input type="email" placeholder="Email" required name="email"/><br>
+            </div>
+            <div class="input-container">
+                <i class="glyphicon glyphicon-lock icon"></i>     
+                <input type="password" placeholder="Password" required name="password"><br>
+            </div>
+            <div class="input-container">    
+                <i class="glyphicon glyphicon-phone icon"></i> 
+                <input type="text" placeholder="Phone Number" required name="cnumber"/><br>
+            </div>
+            <div class="input-container">    
+                <i class="glyphicon glyphicon-home icon"></i> 
+                <input type="text" placeholder="Address" required name="address"/><br>
+            </div>
+        <button  type="submit"><b>Register</b></button>
+        </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" th:href="@{/css/home_style.css}">
+    <link rel="stylesheet" th:href="@{/css/table_style.css}">
+    <link rel="stylesheet" th:href="@{/css/footer_style.css}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <main>
+        <div class="box1">
+            <div class="icon_box">
+                <img id="icon" th:src="@{/image/icon.png}" alt="icon" height="50%">
+                <h3>All Cure Medical Shop</h3>
+            </div>
+            <div class="navigation_box">
+                <div class="nav_links">
+                    <h3 > <a href="home">Home</a> </h3>
+                    <h3 id="nav_home"> <a href="#">Cart</a> </h3>
+                    <h3 th:if="${user} == 'super'"> <a href="product">Products</a> </h3>
+                    <h3 th:if="${user} == 'super'"> <a href="users">Users</a> </h3>
+                    <h3 th:if="${user} == 'super'"> <a href="orders">Orders</a> </h3>
+                </div>
+                <hr>
+                <div class="logout_div">
+                    <h3> <a th:href="@{/logout}">Logout</a> </h3>
+                </div>
+            </div>
+        </div>
+        <div class="box2">
+            <div class="profile_box">
+                <h3 th:inline="text">Welcome, [[${user}]] [[${user}!='salesperson'?user]]</h3>
+            </div>
+            <hr>
+            <div class="label_box">
+                <h1>Cart</h1>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. At dolorem facere suscipit sed eveniet perferendis eum sapiente aliquam molestias optio officiis aut porro quam, labore repellat assumenda fugit nihil? Impedit?</p>
+            </div>
+            <br>
+            
+            <form action="invoice" method="post">
+                <table class="responstable">
+                    <tr>
+                      <th>Order no</th>
+                      <th data-th="Driver details"><span>CNR</span></th>
+                      <th>Product Id</th>
+                      <th>Rate</th>
+                      <th>Quantity</th>
+                      <th>Amount</th>
+                      <th>Status</th>
+                      <th>Booking Date</th>
+                    </tr>
+                    
+                    <tr th:each="order : ${orderList}">
+                      <td th:text="${order.orderNo}">124568921</td>
+                      <td th:text="${order.cnr}">124568921</td>
+                      <td th:text="${order.productId}">P1001</td>
+                      <td th:text="${order.rate}">25</td>
+                      <td th:text="${order.quantity}">200</td>
+                      <td th:text="${order.amount}">5000</td>
+                      <td th:text="${order.status}">03-07-2018</td>
+                      <td th:text="${order.bookingDate}">Pending</td>
+                    </tr>
+                  </table>
+                
+                  <br> <br>
+                  <div class="cart_button_box" align="right">
+                    <!-- <button>Add to cart</button> -->
+                    <input type="submit" value="Buy">
+                  </div>
+            </form>
+            
+        </div>
+    </main>
+    
+    <footer th:replace="home_template :: footer"></footer>
+</body>
+</html>
